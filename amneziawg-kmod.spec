@@ -1,0 +1,58 @@
+%define buildforkernels akmod
+
+Name:           amneziawg-kmod
+Version:        1.0.20260210
+Release:        1%{?dist}
+Epoch:          1
+URL:            https://www.wireguard.com/
+Summary:        Fast, modern, secure VPN tunnel
+License:        GPL-2.0
+BuildArch:      noarch
+
+Source0:        https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v%{version}.tar.gz
+
+BuildRequires:  make
+BuildRequires:  %{_bindir}/kmodtool
+
+%{expand:%(kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null) }
+
+%description
+WireGuard is a novel VPN that runs inside the Linux Kernel and uses
+state-of-the-art cryptography (the "Noise" protocol). It aims to be
+faster, simpler, leaner, and more useful than IPSec, while avoiding
+the massive headache. It intends to be considerably more performant
+than OpenVPN. WireGuard is designed as a general purpose VPN for
+running on embedded interfaces and super computers alike, fit for
+many different circumstances. It runs over UDP.
+
+%prep
+# error out if there was something wrong with kmodtool
+%{?kmodtool_check}
+
+# print kmodtool output for debugging purposes:
+kmodtool  --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
+
+%autosetup -c
+
+for kernel_version in %{?kernel_versions} ; do
+    cp -a %{name}/src _kmod_build_${kernel_version%%___*}
+done
+
+%build
+for kernel_version in %{?kernel_versions}; do
+    make %{?_smp_mflags} -C "${kernel_version##*___}" M=${PWD}/_kmod_build_${kernel_version%%___*} modules
+done
+
+%install
+for kernel_version in %{?kernel_versions}; do
+    mkdir -p %{buildroot}/%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}
+    install -D -m 755 _kmod_build_${kernel_version%%___*}/*.ko %{buildroot}/%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+done
+%{?akmod_install}
+
+%clean
+rm -rf %{buildroot}
+
+%changelog
+* Sat Feb 28 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-1
+- Initial build
