@@ -9,7 +9,9 @@ Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
 
 Source0:        https://github.com/YroriXW/amneziawg-rpm/releases/download/v%{version}-%{release}/amneziawg-kmod.tar.gz
+
 Patch0:			https://github.com/babiulep/my-kernel-patches/blob/main/AMNEZIAWG/blake2s.patch
+Patch1:			https://github.com/YroriXW/amneziawg-rpm/blob/main/fixmemleakinjpspecsetup.patch
 
 BuildRequires:  make
 BuildRequires:  kmodtool
@@ -45,6 +47,9 @@ if [ -n "$kver" ] && { [ "$kmaj" -gt 6 ] || { [ "$kmaj" -eq 6 ] && [ "$kmin" -ge
     echo "Applying blake2s patch for kernel $kver"
     patch -p1 < %{PATCH0}
 fi
+
+echo "Applying memory leak fix for jp_spec_setup"
+patch -p1 < %{PATCH1}
 
 popd
 
