@@ -4,14 +4,14 @@
 Name:           amneziawg-kmod
 Version:        1.0.20260210
 Release:        2%{?dist}
-URL:            https://www.wireguard.com/
+URL:            https://github.com/amnezia-vpn/amneziawg-linux-kernel-module
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
 
-Source0:        https://github.com/YroriXW/amneziawg-rpm/releases/download/v%{version}-%{release}/amneziawg-kmod.tar.gz
+Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{version}-%{release}/amneziawg-kmod.tar.gz
 
-Patch0:			https://github.com/babiulep/my-kernel-patches/blob/main/AMNEZIAWG/blake2s.patch
-Patch1:			https://github.com/YroriXW/amneziawg-rpm/blob/main/fixmemleakinjpspecsetup.patch
+Patch0:			https://github.com/babiulep/my-kernel-patches/raw/refs/heads/main/AMNEZIAWG/blake2s.patch
+Patch1:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixmemleakinjpspecsetup.patch
 
 BuildRequires:  make
 BuildRequires:  kmodtool
@@ -77,5 +77,7 @@ fi
 %{?akmod_install}
 
 %changelog
+* Sun Mar 1 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-2
+- Added patch for memory leak, blake2s
 * Sat Feb 28 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-1
 - Initial build

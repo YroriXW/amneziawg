@@ -5,7 +5,7 @@ Version:        1.0.20260210
 Release:        2%{?dist}
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
-URL:            https://github.com/YroriXW/amneziawg-linux-kernel-module
+URL:            https://github.com/YroriXW/amneziawg
 Requires:       (akmod-amneziawg >= %{version} or kmod-amneziawg >= %{version})
 Requires:       amneziawg-tools >= %{version}
 Provides:       amneziawg-kmod-common = %{version}
@@ -18,5 +18,7 @@ Common package for AmneziaWG
 %files
 
 %changelog
+* Sun Mar 1 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-2
+- Added patch for memory leak, blake2s
 * Sat Feb 28 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-1
 - Initial build
