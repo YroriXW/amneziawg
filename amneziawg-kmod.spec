@@ -10,7 +10,7 @@ License:        GPL-2.0-only
 
 Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{version}-%{release}/amneziawg-kmod.tar.gz
 
-Patch0:			https://github.com/babiulep/my-kernel-patches/raw/refs/heads/main/AMNEZIAWG/blake2s.patch
+Patch0:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/blake2s.patch
 Patch1:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixmemleakinjpspecsetup.patch
 Patch2:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixversion.patch
 
