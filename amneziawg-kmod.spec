@@ -12,7 +12,7 @@ Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{versio
 
 Patch0:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/blake2s.patch
 Patch1:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixmemleakinjpspecsetup.patch
-Patch2:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixversion.patch
+Patch2:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixversionkernel.patch
 
 BuildRequires:  make
 BuildRequires:  kmodtool

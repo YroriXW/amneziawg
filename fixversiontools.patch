@@ -1,0 +1,9 @@
+diff --git a/src/version.h b/src/version.h
+index 814bfd0..bcab846 100644
+--- a/src/version.h
++++ b/src/version.h
+@@ -1,3 +1,3 @@
+ #ifndef WIREGUARD_TOOLS_VERSION
+-#define WIREGUARD_TOOLS_VERSION "1.0.20210914"
++#define WIREGUARD_TOOLS_VERSION "1.0.20260223"
+ #endif

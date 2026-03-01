@@ -7,6 +7,8 @@ License:        GPL-2.0-only
 
 Source0:        https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v%{version}.tar.gz
 
+Patch0:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixversiontools.patch
+
 %{?systemd_requires}
 BuildRequires: make
 BuildRequires: systemd
