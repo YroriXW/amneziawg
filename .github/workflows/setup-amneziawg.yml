@@ -60,7 +60,7 @@ jobs:
           
           cp -r blake2sintegrationMakefile.patch fixmemleakinjpspecsetup.patch fixversionkernel.patch debian/patches
           cp -r debian amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/
-          cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }} && export QUILT_PATCHES=debian/patches && quilt push -a && rm -rf .pc && rm -rf debian/patches && cd ../
+          cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }} && export QUILT_PATCHES=debian/patches && quilt push -a && rm -rf .pc && rm -rf debian/patches && unset QUILT_PATCHES && cd ../
 
           mkdir amneziawg-unified
           cp -r amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/COPYING blake2s.patch amneziawg-unified/
@@ -68,7 +68,7 @@ jobs:
 
           cp -r fixversiontools.patch debian_awgtools/patches/
           cp -r debian_awgtools amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/
-          cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }} && export QUILT_PATCHES=debian/patches && quilt push -a && rm -rf .pc && rm -rf debian_awgtools/patches && cd ../
+          cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }} && export QUILT_PATCHES=debian/patches && quilt push -a && rm -rf .pc && rm -rf debian_awgtools/patches && unset QUILT_PATCHES && cd ../
           
           mkdir amneziawg-tools
           cp -r amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/contrib amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/COPYING amneziawg-tools/
