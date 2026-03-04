@@ -76,7 +76,8 @@ jobs:
           rm -rf amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian/patches       
           cp -r amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/contrib amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/COPYING amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian amneziawg_${{ steps.version.outputs.upstream_tools }}/
           tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}.tar.gz amneziawg_${{ steps.version.outputs.upstream_tools }}
-          cp amneziawg_${{ steps.version.outputs.upstream_tools }}.tar.gz amneziawg-tools.tar.gz
+          cp -r amneziawg_${{ steps.version.outputs.upstream_tools }} amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
+          tar -czvf amneziawg-tools.tar.gz amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
 
           MD5=$(md5sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.tar.gz | cut -d ' ' -f1)
           SHA256=$(sha256sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.tar.gz | cut -d ' ' -f1)
