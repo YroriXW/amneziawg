@@ -8,7 +8,7 @@ URL:            https://github.com/amnezia-vpn/amneziawg-linux-kernel-module
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
 
-Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{version}-%{release}/amneziawg-unified.tar.gz
+Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{version}-%{release}/amneziawg-kmod.tar.gz
 
 BuildRequires:  make
 BuildRequires:  kmodtool
@@ -34,7 +34,7 @@ kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{build
 
 %autosetup -c -N
 
-pushd amneziawg-unified
+pushd %{name}
 
 kver=%{?kernel_versions}
 kver=${kver%%___*}
@@ -48,7 +48,7 @@ fi
 popd
 
 for kernel_version in %{?kernel_versions} ; do
-    cp -a amneziawg-unified _kmod_build_${kernel_version%%___*}
+    cp -a %{name} _kmod_build_${kernel_version%%___*}
 done
 
 %build
