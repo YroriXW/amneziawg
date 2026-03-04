@@ -181,3 +181,6 @@ jobs:
             amneziawg-kmod.dsc
             amneziawg-tools.dsc
             amneziawg.dsc
+            amneziawg-kmod.spec
+            amneziawg-tools.spec
+            amneziawg.spec
