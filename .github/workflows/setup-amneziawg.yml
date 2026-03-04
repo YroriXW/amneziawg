@@ -82,7 +82,7 @@ jobs:
           tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz amneziawg_${{ steps.version.outputs.upstream_tools }}
           cp -r amneziawg_${{ steps.version.outputs.upstream_tools }} amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
           tar -czvf amneziawg-tools.tar.gz amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
-          cd amneziawg_${{ steps.version.outputs.upstream_tools }}
+          cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
           tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz debian
           mv amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz ../
           cd ../
