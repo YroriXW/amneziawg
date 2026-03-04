@@ -16,8 +16,8 @@ jobs:
     
       - name: Preparing environment
         run: |
-          apt-get update
-          apt-get install quilt dpkg-dev xz-utils -y
+          sudo apt-get update
+          sudo apt-get install quilt dpkg-dev xz-utils -y
     
       - name: Parse version and release
         id: version
