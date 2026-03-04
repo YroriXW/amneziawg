@@ -65,11 +65,11 @@ jobs:
           mkdir amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}
           rm -rf amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/debian/patches       
           cp -r amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/COPYING blake2s.patch amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/
-          tar -czvf amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.xz amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}
+          tar -czvf amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}
           tar -czvf amneziawg-kmod.tar.gz amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}
           cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}
-          tar -czvf amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz debian
-          mv amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz ../
+          tar -czvf amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz debian
+          mv amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz ../
           cd ../
 
           cp -r fixversiontools.patch debian_awgtools/patches/
@@ -79,20 +79,20 @@ jobs:
           mkdir amneziawg_${{ steps.version.outputs.upstream_tools }}
           rm -rf amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian/patches       
           cp -r amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/contrib amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/COPYING amneziawg_${{ steps.version.outputs.upstream_tools }}/
-          tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz amneziawg_${{ steps.version.outputs.upstream_tools }}
+          tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz amneziawg_${{ steps.version.outputs.upstream_tools }}
           cp -r amneziawg_${{ steps.version.outputs.upstream_tools }} amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
           tar -czvf amneziawg-tools.tar.gz amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
           cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
-          tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz debian
-          mv amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz ../
+          tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz debian
+          mv amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz ../
           cd ../
 
-          MD5orig=$(md5sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.xz | cut -d ' ' -f1)
-          MD5debian=$(md5sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz | cut -d ' ' -f1)
-          SHA256orig=$(sha256sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.xz | cut -d ' ' -f1)
-          SHA256debian=$(sha256sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz | cut -d ' ' -f1)
-          SIZEorig=$(wc -c < amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.xz)
-          SIZEdebian=$(wc -c < amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz)
+          MD5orig=$(md5sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz | cut -d ' ' -f1)
+          MD5debian=$(md5sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
+          SHA256orig=$(sha256sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz | cut -d ' ' -f1)
+          SHA256debian=$(sha256sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
+          SIZEorig=$(wc -c < amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz)
+          SIZEdebian=$(wc -c < amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz)
 
           cat > amneziawg-kmod.dsc << EOF
           Format: 3.0 (quilt)
@@ -109,19 +109,19 @@ jobs:
             amneziawg-dkms deb kernel optional arch=all    
           Homepage: https://amnezia.org
           Files:
-           ${MD5orig} ${SIZEorig} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.xz
-           ${MD5debian} ${SIZEdebian} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz
+           ${MD5orig} ${SIZEorig} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz
+           ${MD5debian} ${SIZEdebian} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
           Checksums-Sha256:
-           ${SHA256orig} ${SIZEorig} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.xz
-           ${SHA256debian} ${SIZEdebian} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz
+           ${SHA256orig} ${SIZEorig} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz
+           ${SHA256debian} ${SIZEdebian} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
           EOF
 
-          MD5orig=$(md5sum amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz | cut -d ' ' -f1)
-          MD5debian=$(md5sum amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz | cut -d ' ' -f1)
-          SHA256orig=$(sha256sum amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz | cut -d ' ' -f1)
-          SHA256debian=$(sha256sum amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz | cut -d ' ' -f1)
-          SIZEorig=$(wc -c < amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz)
-          SIZEdebian=$(wc -c < amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz)
+          MD5orig=$(md5sum amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz | cut -d ' ' -f1)
+          MD5debian=$(md5sum amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
+          SHA256orig=$(sha256sum amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz | cut -d ' ' -f1)
+          SHA256debian=$(sha256sum amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
+          SIZEorig=$(wc -c < amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz)
+          SIZEdebian=$(wc -c < amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz)
 
           cat > amneziawg.dsc << EOF
           Format: 3.0 (quilt)
@@ -138,11 +138,11 @@ jobs:
             amneziawg deb net optional arch=all
           Homepage: https://amnezia.org
           Files:
-           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz
-           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz
+           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
+           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
           Checksums-Sha256:
-           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz
-           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz
+           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
+           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
           EOF
 
           cat > amneziawg-tools.dsc << EOF
@@ -160,21 +160,21 @@ jobs:
             amneziawg-tools deb net optional arch=all
           Homepage: https://amnezia.org          
           Files:
-           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz
-           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz
+           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
+           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
           Checksums-Sha256:
-           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz
-           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz
+           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
+           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
           EOF
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.xz
-            amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.xz
-            amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.xz
-            amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.xz
+            amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz
+            amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
+            amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
+            amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
             amneziawg-kmod.tar.gz
             amneziawg-tools.tar.gz
             amneziawg-kmod.dsc
