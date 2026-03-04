@@ -73,9 +73,10 @@ jobs:
           SHA256=$(sha256sum amneziawg-unified.tar.gz | cut -d ' ' -f1)
           SIZE=$(wc -c < amneziawg-unified.tar.gz)
 
-          cat > amneziawg-linux-kmod.dsc << EOF
+          cat > amneziawg-kmod.dsc << EOF
           Format: 3.0 (native)
           Source: amneziawg-linux-kmod
+          Binary: amneziawg-dkms
           Version: ${{ steps.version.outputs.upstream }}
           Maintainer: Oleg YroriXW <olegyrori@gmail.com>
           Architecture: all
@@ -96,7 +97,7 @@ jobs:
           SHA256=$(sha256sum amneziawg-tools.tar.gz | cut -d ' ' -f1)
           SIZE=$(wc -c < amneziawg-tools.tar.gz)
 
-          cat > amneziawg.dsc << EOF
+          cat > amneziawg-tools.dsc << EOF
           Format: 3.0 (native)
           Source: amneziawg
           Binary: amneziawg, amneziawg-tools
@@ -124,5 +125,5 @@ jobs:
           files: |
             amneziawg-unified.tar.gz
             amneziawg-tools.tar.gz
-            amneziawg-linux-kmod.dsc
-            amneziawg.dsc
+            amneziawg-kmod.dsc
+            amneziawg-tools.dsc
