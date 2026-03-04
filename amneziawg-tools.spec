@@ -5,9 +5,7 @@ URL:            https://www.wireguard.com/
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
 
-Source0:        https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v%{version}.tar.gz
-
-Patch0:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixversiontools.patch
+Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{version}-%{release}/amneziawg-tools.tar.gz
 
 %{?systemd_requires}
 BuildRequires: make
