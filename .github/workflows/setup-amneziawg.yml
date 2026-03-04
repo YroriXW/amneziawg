@@ -69,7 +69,7 @@ jobs:
           cp amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz amneziawg-kmod.tar.gz
           cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}
           tar -czvf amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz debian
-          mv amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.debian.tar.gz ../
+          mv amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz ../
           cd ../
 
           cp -r fixversiontools.patch debian_awgtools/patches/
@@ -84,7 +84,7 @@ jobs:
           tar -czvf amneziawg-tools.tar.gz amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
           cd amneziawg_${{ steps.version.outputs.upstream_tools }}
           tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz debian
-          mv amneziawg_${{ steps.version.outputs.upstream_tools }}.debian.tar.gz ../
+          mv amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz ../
           cd ../
 
           MD5orig=$(md5sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz | cut -d ' ' -f1)
