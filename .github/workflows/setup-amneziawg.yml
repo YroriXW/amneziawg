@@ -98,7 +98,7 @@ jobs:
           Format: 3.0 (quilt)
           Source: amneziawg-linux-kmod
           Binary: amneziawg-dkms
-          Version: ${{ steps.version.outputs.upstream }}
+          Version: ${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}
           Maintainer: Oleg YroriXW <olegyrori@gmail.com>
           Architecture: all
           Vcs-Git: https://github.com/YroriXW/amneziawg.git
@@ -127,7 +127,7 @@ jobs:
           Format: 3.0 (quilt)
           Source: amneziawg
           Binary: amneziawg
-          Version: ${{ steps.version.outputs.upstream_tools }}
+          Version: ${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}
           Maintainer: Oleg YroriXW <olegyrori@gmail.com>
           Architecture: all
           Vcs-Git: https://github.com/amnezia-vpn/amnezia-wg-tools.git
@@ -146,10 +146,10 @@ jobs:
           EOF
 
           cat > amneziawg-tools.dsc << EOF
-          Format: 3.0 (native)
+          Format: 3.0 (quilt)
           Source: amneziawg
           Binary: amneziawg-tools
-          Version: ${{ steps.version.outputs.upstream_tools }}
+          Version: ${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}
           Maintainer: Oleg YroriXW <olegyrori@gmail.com>
           Architecture: all
           Vcs-Git: https://github.com/amnezia-vpn/amnezia-wg-tools.git
