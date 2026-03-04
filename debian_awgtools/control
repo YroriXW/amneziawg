@@ -1,0 +1,57 @@
+Source: amneziawg
+Section: net
+Priority: optional
+Maintainer: Oleg YroriXW <olegyrori@gmail.com>
+XSBC-Original-Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Uploaders:
+ Unit 193 <unit193@debian.org>,
+Build-Depends:
+ debhelper-compat (= 13),
+ pkg-config,
+ systemd,
+Standards-Version: 4.7.2
+Homepage: https://www.wireguard.com
+Vcs-Git: https://github.com/amnezia-vpn/amnezia-wg-tools.git
+Vcs-Browser: https://github.com/amnezia-vpn/amnezia-wg-tools
+Rules-Requires-Root: no
+
+Package: amneziawg
+Architecture: all
+Depends:
+ amneziawg-dkms (>= 1.0.20260210) | amneziawg-modules (>= 1.0.20260210),
+ amneziawg-tools (>= ${source:Version}),
+ ${misc:Depends},
+Description: fast, modern, secure kernel VPN tunnel (metapackage)
+ WireGuard is a novel VPN that runs inside the Linux Kernel and uses
+ state-of-the-art cryptography (the "Noise" protocol). It aims to be
+ faster, simpler, leaner, and more useful than IPSec, while avoiding
+ the massive headache. It intends to be considerably more performant
+ than OpenVPN. WireGuard is designed as a general purpose VPN for
+ running on embedded interfaces and super computers alike, fit for
+ many different circumstances. It runs over UDP.
+ .
+ This metapackage explicitly depends on both the kernel module and the
+ userspace tooling.
+
+Package: amneziawg-tools
+Architecture: linux-any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ amneziawg-modules (>= 1.0.20260210) | amneziawg-dkms (>= 1.0.20260210),
+Recommends:
+ nftables | iptables,
+Suggests: openresolv | resolvconf,
+Description: fast, modern, secure kernel VPN tunnel (userland utilities)
+ WireGuard is a novel VPN that runs inside the Linux Kernel and uses
+ state-of-the-art cryptography (the "Noise" protocol). It aims to be
+ faster, simpler, leaner, and more useful than IPSec, while avoiding
+ the massive headache. It intends to be considerably more performant
+ than OpenVPN. WireGuard is designed as a general purpose VPN for
+ running on embedded interfaces and super computers alike, fit for
+ many different circumstances. It runs over UDP.
+ .
+ This package contains command-line tools to interact with the
+ WireGuard kernel module.  Currently, it provides only a single tool:
+ .
+ awg: set and retrieve configuration of WireGuard interfaces

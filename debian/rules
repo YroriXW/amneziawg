@@ -1,0 +1,20 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE = 1
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+include /usr/share/dpkg/default.mk
+
+%:
+	dh $@ --with dkms
+
+override_dh_auto_test:
+	@true
+
+test:
+	@true
+
+override_dh_auto_install:
+	$(MAKE) DESTDIR=$$(pwd)/debian/amneziawg-dkms DKMSDIR=/usr/src/amneziawg-$(DEB_VERSION_UPSTREAM) dkms-install
+
+override_dh_dkms:
+	dh_dkms -p amneziawg-dkms -V $(DEB_VERSION_UPSTREAM) -- ./dkms.conf

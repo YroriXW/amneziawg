@@ -1,0 +1,3 @@
+fixmemleakinjpspecsetup.patch
+fixversionkernel.patch
+blake2sintegrationMakefile.patch

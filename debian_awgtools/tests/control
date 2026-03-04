@@ -1,0 +1,18 @@
+Tests: keygen
+Restrictions: superficial
+Depends:
+ wireguard-tools,
+
+Tests: wg-quick
+Restrictions: needs-root, isolation-container, allow-stderr, skip-not-installable
+Depends:
+ iproute2,
+ iputils-ping,
+ @,
+
+Tests: netns-mini
+Restrictions: needs-root, isolation-container, skip-not-installable
+Depends:
+ iproute2,
+ iputils-ping,
+ @,

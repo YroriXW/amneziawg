@@ -3,16 +3,12 @@
 
 Name:           amneziawg-kmod
 Version:        1.0.20260210
-Release:        2%{?dist}
+Release:        3%{?dist}
 URL:            https://github.com/amnezia-vpn/amneziawg-linux-kernel-module
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
 
 Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{version}-%{release}/amneziawg-kmod.tar.gz
-
-Patch0:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/blake2s.patch
-Patch1:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixmemleakinjpspecsetup.patch
-Patch2:			https://github.com/YroriXW/amneziawg/raw/refs/heads/main/fixversionkernel.patch
 
 BuildRequires:  make
 BuildRequires:  kmodtool
@@ -46,14 +42,8 @@ kmaj=$(echo $kver | cut -d. -f1)
 kmin=$(echo $kver | cut -d. -f2)
 if [ -n "$kver" ] && { [ "$kmaj" -gt 6 ] || { [ "$kmaj" -eq 6 ] && [ "$kmin" -ge 18 ]; }; }; then
     echo "Applying blake2s patch for kernel $kver"
-    patch -p1 < %{PATCH0}
+    patch -p1 < ./blake2s.patch
 fi
-
-echo "Applying memory leak fix for jp_spec_setup"
-patch -p1 < %{PATCH1}
-
-echo "Applying version string fix"
-patch -p1 < %{PATCH2}
 
 popd
 
@@ -81,6 +71,8 @@ fi
 %{?akmod_install}
 
 %changelog
+* Wed Mar 4 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-3
+- Added debian builds, patches applying in the CI now
 * Sun Mar 1 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-2
 - Added patch for memory leak, blake2s, version string
 * Sat Feb 28 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-1

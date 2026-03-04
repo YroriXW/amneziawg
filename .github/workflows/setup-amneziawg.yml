@@ -11,30 +11,67 @@ jobs:
           contents: write 
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+    
+      - name: Preparing environment
+        run: |
+          apt-get update
+          apt-get install quilt dpkg-dev xz-utils -y
+    
       - name: Parse version and release
         id: version
         run: |
           TAG=${GITHUB_REF_NAME#v}
           UPSTREAM=${TAG%-*}
           RELEASE=${TAG##*-}
+          UPSTREAM_TOOLS=1.0.20260223
           echo "upstream=$UPSTREAM" >> $GITHUB_OUTPUT
+          echo "upstream_tools=$UPSTREAM_TOOLS" >> $GITHUB_OUTPUT
           echo "release=$RELEASE" >> $GITHUB_OUTPUT
 
       - name: Download upstream source
         run: |
           wget -O source.tar.gz \
             "https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v${{ steps.version.outputs.upstream }}.tar.gz"
+          wget -O source-tools.tar.gz \
+            "https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v${{ steps.version.outputs.upstream_tools }}.tar.gz"
 
       - name: Extract and repack
         run: |
           tar -xzf source.tar.gz
+          tar -xzf source-tools.tar.gz
 
-          mkdir amneziawg-kmod
-          cp -r amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/COPYING amneziawg-kmod/
+          cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src
+          rm -rf dkms.conf
+          cat > dkms.conf << EOF
+          PACKAGE_NAME="amneziawg"
+          PACKAGE_VERSION="${{ steps.version.outputs.upstream_tools }}"
+          AUTOINSTALL=yes
+          
+          BUILT_MODULE_NAME="amneziawg"
+          DEST_MODULE_LOCATION="/kernel/drivers/net/wireguard"
+          PRE_BUILD="pre-build.sh"
+          EOF
+          cd ../../
 
-          tar -czvf amneziawg-kmod.tar.gz amneziawg-kmod
+          cp -r blake2sintegrationMakefile.patch fixmemleakinjpspecsetup.patch fixversionkernel.patch debian/patches/
+          cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }} && export QUILT_PATCHES=debian/patches && quilt push -a && rm -rf .pc && rm -rf debian/patches && cd ../
+
+          mkdir amneziawg-unified
+          cp -r amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/COPYING blake2s.patch debian amneziawg-unified/
+          tar -czvf amneziawg-unified.tar.gz amneziawg-unified
+
+          cp -r fixversiontools.patch debian_awgtools/patches/
+          cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }} && export QUILT_PATCHES=debian/patches && quilt push -a && rm -rf .pc && rm -rf debian_awgtools/patches && cd ../
+
+          mkdir amneziawg-tools
+          cp -r amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/contrib amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/COPYING debian_awgtools amneziawg-tools/
+          tar -czvf amneziawg-tools.tar.gz amneziawg-tools
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
-          files: amneziawg-kmod.tar.gz
+          files: |
+            amneziawg-unified.tar.gz
+            amneziawg-tools.tar.gz

@@ -1,0 +1,34 @@
+Source: amneziawg-linux-kmod
+Section: net
+Priority: optional
+Maintainer: Oleg YroriXW <olegyrori@gmail.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-dkms,
+ dkms
+Standards-Version: 4.7.2
+Homepage: https://amnezia.org
+Vcs-Git: https://github.com/YroriXW/amneziawg.git
+Vcs-Browser: https://github.com/YroriXW/amneziawg
+Rules-Requires-Root: no
+
+Package: amneziawg-dkms
+Architecture: all
+Section: kernel
+Depends:
+ ${misc:Depends},
+ ${perl:Depends},
+ dkms,
+ amneziawg (>= 1.0.20260210),
+ amneziawg-tools (>= 1.0.20260210)
+Description: fast, modern, secure kernel VPN tunnel (DKMS version)
+ WireGuard is a novel VPN that runs inside the Linux Kernel and uses
+ state-of-the-art cryptography (the "Noise" protocol). It aims to be
+ faster, simpler, leaner, and more useful than IPSec, while avoiding
+ the massive headache. It intends to be considerably more performant
+ than OpenVPN. WireGuard is designed as a general purpose VPN for
+ running on embedded interfaces and super computers alike, fit for
+ many different circumstances. It runs over UDP.
+ .
+ This package uses DKMS to automatically build the wireguard kernel
+ module.

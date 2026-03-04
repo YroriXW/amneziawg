@@ -1,0 +1,13 @@
+amneziawg-linux-kmod (1.0.20260210-3) trixie; urgency=medium
+
+  * Added patches: blake2s and memory leak fix (from RPM spec)
+  * Modernized packaging: debhelper-compat=13
+  * Updated standards to 4.7.2
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Wed, 04 Mar 2026 11:11:00 +0300
+
+amneziawg-linux-kmod (1.0.0) unstable; urgency=medium
+
+  * Initial release
+
+ -- unidentified attacker <ua@amnezia.org>  Fri, 01 Dec 2023 11:11:00 +0300

@@ -1,7 +1,7 @@
-diff --git a/junk.c b/junk.c
+diff --git a/src/junk.c b/src/junk.c
 index 0b5781a..772ede9 100644
---- a/junk.c
-+++ b/junk.c
+--- a/src/junk.c
++++ b/src/junk.c
 @@ -281,14 +281,17 @@ int jp_spec_setup(struct jp_spec *spec) {
          goto error;
      }
