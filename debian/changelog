@@ -1,3 +1,10 @@
+amneziawg-linux-kmod (1.0.20260210-4) trixie; urgency=medium
+
+  * Introduced smart check for blake2s patching 
+  * properly building deb
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Wed, 05 Mar 2026 11:11:00 +0300
+
 amneziawg-linux-kmod (1.0.20260210-3) trixie; urgency=medium
 
   * Added patches: blake2s and memory leak fix (from RPM spec)
