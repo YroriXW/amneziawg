@@ -37,12 +37,15 @@ kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{build
 pushd %{name}
 
 kver=%{?kernel_versions}
-kver=${kver%%___*}
-kmaj=$(echo $kver | cut -d. -f1)
-kmin=$(echo $kver | cut -d. -f2)
-if [ -n "$kver" ] && { [ "$kmaj" -gt 6 ] || { [ "$kmaj" -eq 6 ] && [ "$kmin" -ge 18 ]; }; }; then
-    echo "Applying blake2s patch for kernel $kver"
+kbuilddir="${kver##*___}"
+kver="${kver%%___*}"
+# Check actual kernel API rather than version: xanmod and similar forks
+# may stay on the old blake2s_state API even on 6.18+
+if grep -q 'struct blake2s_ctx' "${kbuilddir}/include/crypto/blake2s.h" 2>/dev/null; then
+    echo "Applying blake2s patch for kernel $kver (new blake2s API detected)"
     patch -p1 < ./blake2s.patch
+else
+    echo "Skipping blake2s patch for kernel $kver (old blake2s API or headers not found)"
 fi
 
 popd
