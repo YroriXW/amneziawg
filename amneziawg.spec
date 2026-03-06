@@ -18,9 +18,9 @@ Common package for AmneziaWG
 %files
 
 %changelog
-* Wed Mar 6 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-5
+* Fri Mar 6 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-5
 - Fix links, copyrights, typos and simplify logic of applying blake2s patch
-* Wed Mar 5 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-4
+* Thu Mar 5 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-4
 - Introduced smart check for blake2s patching, properly building deb
 * Wed Mar 4 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-3
 - Added debian builds, patches applying in the CI now
