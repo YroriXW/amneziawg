@@ -3,9 +3,8 @@ Section: net
 Priority: optional
 Maintainer: Oleg YroriXW <olegyrori@gmail.com>
 Build-Depends:
- debhelper-compat (= 13),
- dh-dkms,
- dkms
+ debhelper-compat (= 13)
+Build-Depends-Indep: dh-dkms | dkms (<< 3.0.10)
 Standards-Version: 4.7.2
 Homepage: https://amnezia.org
 Vcs-Git: https://github.com/YroriXW/amneziawg.git

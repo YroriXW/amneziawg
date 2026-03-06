@@ -105,7 +105,8 @@ jobs:
           Architecture: all
           Vcs-Git: https://github.com/YroriXW/amneziawg.git
           Vcs-Browser: https://github.com/YroriXW/amneziawg
-          Build-Depends: debhelper-compat (= 13), dh-dkms, dkms
+          Build-Depends: debhelper-compat (= 13)
+          Build-Depends-Indep: dh-dkms | dkms (<< 3.0.10)
           Standards-Version: 4.7.2
           Package-List:
             amneziawg-dkms deb kernel optional arch=all    
