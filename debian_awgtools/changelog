@@ -1,3 +1,48 @@
+amneziawg (1.0.20260223-7) unstable; urgency=medium
+
+  * Automations
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sat, 07 Mar 2026 17:11:00 +0300
+
+amneziawg (1.0.20260223-6) unstable; urgency=medium
+
+  * Unified changelog for deb based distros
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sat, 07 Mar 2026 11:11:00 +0300
+
+amneziawg (1.0.20260223-5) unstable; urgency=medium
+
+  * Fix links, copyrights, typos
+  * Simplify logic of applying blake2s patch
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Fri, 06 Mar 2026 11:11:00 +0300
+
+amneziawg (1.0.20260223-4) unstable; urgency=medium
+
+  * Introduced smart check for blake2s patching
+  * Properly building deb
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Thu, 05 Mar 2026 11:11:00 +0300
+
+amneziawg (1.0.20260223-3) unstable; urgency=medium
+
+  * Added debian builds
+  * Patches applying in CI now
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Wed, 04 Mar 2026 11:11:00 +0300
+
+amneziawg (1.0.20260223-2) unstable; urgency=medium
+
+  * Added patch for memory leak, blake2s, version string
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sun, 01 Mar 2026 11:11:00 +0300
+
+amneziawg (1.0.20260223-1) unstable; urgency=medium
+
+  * Initial build
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sat, 28 Feb 2026 11:11:00 +0300
+
 amneziawg (1.0.20210914-1ubuntu2) jammy; urgency=medium
 
   * Add better DEP8 tests (LP: #1952102):

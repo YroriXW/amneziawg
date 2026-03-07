@@ -48,3 +48,27 @@ WITH_BASHCOMPLETION=yes WITH_WGQUICK=yes WITH_SYSTEMDUNITS=yes -C src
 %{_mandir}/man8/awg-quick.8*
 
 %changelog
+* Sat Mar 07 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-7
+- Automations
+
+* Sat Mar 07 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-6
+- Unified changelog for deb based distros
+
+* Fri Mar 06 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-5
+- Fix links, copyrights, typos
+- Simplify logic of applying blake2s patch
+
+* Thu Mar 05 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-4
+- Introduced smart check for blake2s patching
+- Properly building deb
+
+* Wed Mar 04 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-3
+- Added debian builds
+- Patches applying in CI now
+
+* Sun Mar 01 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-2
+- Added patch for memory leak, blake2s, version string
+
+* Sat Feb 28 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-1
+- Initial build
+
