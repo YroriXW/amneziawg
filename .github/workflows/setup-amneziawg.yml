@@ -53,7 +53,7 @@ jobs:
           git add CHANGELOG debian/changelog debian_awgtools/changelog \
                   amneziawg-kmod.spec amneziawg-tools.spec amneziawg.spec
           git diff --cached --quiet || git commit -m "chore: update changelogs for v${UPSTREAM}-${RELEASE}"
-          git push
+          git push origin HEAD:main
 
       - name: Download upstream source
         run: |
