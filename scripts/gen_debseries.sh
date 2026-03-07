@@ -11,8 +11,8 @@ if [[ -z "$SOURCE_DIR" || -z "$OUTPUT_FILE" ]]; then
 fi
 
 if [[ ! -d "$SOURCE_DIR" ]]; then
-    echo "Error: directory '$SOURCE_DIR' does not exist." >&2
-    exit 1
+    echo "Source directory '$SOURCE_DIR' not found, skipping."
+    exit 0
 fi
 
 OUTPUT_DIR="$(dirname "$OUTPUT_FILE")"
