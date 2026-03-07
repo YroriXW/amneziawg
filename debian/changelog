@@ -1,3 +1,21 @@
+amneziawg-linux-kmod (1.0.20260210-7) unstable; urgency=medium
+
+  * Automations
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sat, 07 Mar 2026 17:11:00 +0300
+
+amneziawg-linux-kmod (1.0.20260210-2) unstable; urgency=medium
+
+  * Added patch for memory leak, blake2s, version string
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sun, 01 Mar 2026 11:11:00 +0300
+
+amneziawg-linux-kmod (1.0.20260210-1) unstable; urgency=medium
+
+  * Initial build
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sat, 28 Feb 2026 11:11:00 +0300
+
 amneziawg-linux-kmod (1.0.20260210-6) unstable; urgency=medium
 
   * Unified changelog for deb based distros
