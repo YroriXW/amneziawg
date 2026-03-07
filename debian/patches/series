@@ -1,2 +1,2 @@
+AutomaticPatchesIntegrationIntoTheMakefile.patch
 fixmemleakinjpspecsetup.patch
-blake2sintegrationMakefile.patch
