@@ -107,7 +107,7 @@ jobs:
           cd ../
 
           # cp -r patches/automatic/tools/*.patch debian_awgtools/patches/ || true
-          # cp -r debian_awgtools amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian
+          cp -r debian_awgtools amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian
           # cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }} && export QUILT_PATCHES=debian/patches && quilt push -a || true && rm -rf .pc && cd ../
           
           mkdir amneziawg_${{ steps.version.outputs.upstream_tools }}
