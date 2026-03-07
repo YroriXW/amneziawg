@@ -36,7 +36,7 @@ jobs:
           UPSTREAM_TOOLS: ${{ steps.version.outputs.upstream_tools }}
           RELEASE: ${{ steps.version.outputs.release }}
         run: |
-          bash gen-changelog.sh \
+          bash gen_changelog.sh \
             "${UPSTREAM}" "${UPSTREAM_TOOLS}" \
             "Oleg YroriXW" "olegyrori@gmail.com"
 
