@@ -11,7 +11,7 @@ This is **unofficial** builds. The original project is developed by the [Amnezia
 Builds are available for:
 - **Debian** (11, 12, 13)
 - **Ubuntu** (22.04, 24.04, 25.10)
-- **Fedora** (41, 42, 43)
+- **Fedora** (42, 43)
 - **EPEL** (9, 10)
 
 via [my OBS repository](https://build.opensuse.org/package/show/home:YroriXW/amneziawg).
