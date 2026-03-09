@@ -10,7 +10,9 @@ License:        GPL-2.0-only
 
 Source0:        https://github.com/YroriXW/amneziawg/releases/download/v%{version}-%{release}/amneziawg-kmod.tar.gz
 
+Requires: patch
 BuildRequires:  make
+BuildRequires:  patch
 BuildRequires:  kmodtool
 
 # kmodtool does its magic here
