@@ -19,13 +19,15 @@ BuildRequires:  kmodtool
 %{expand:%(kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null) }
 
 %description
-WireGuard is a novel VPN that runs inside the Linux Kernel and uses
-state-of-the-art cryptography (the "Noise" protocol). It aims to be
-faster, simpler, leaner, and more useful than IPSec, while avoiding
-the massive headache. It intends to be considerably more performant
-than OpenVPN. WireGuard is designed as a general purpose VPN for
-running on embedded interfaces and super computers alike, fit for
-many different circumstances. It runs over UDP.
+AmneziaWG is an obfuscated fork of WireGuard — a high-performance VPN
+that runs inside the Linux Kernel and uses state-of-the-art cryptography
+(the "Noise" protocol). On top of WireGuard's design goals — fast, simple,
+lean, and more practical than IPSec or OpenVPN — AmneziaWG adds
+configurable traffic obfuscation via junk packet injection and header
+randomization, making it resistant to DPI-based detection and blocking.
+It is designed for censorship circumvention in restrictive network
+environments while retaining full compatibility with standard WireGuard
+peers. Runs over UDP.
 
 %prep
 # error out if there was something wrong with kmodtool
