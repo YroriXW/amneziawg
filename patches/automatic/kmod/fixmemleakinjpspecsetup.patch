@@ -1,24 +1,87 @@
 diff --git a/src/junk.c b/src/junk.c
-index 0b5781a..772ede9 100644
+index 0b5781a..8312791 100644
 --- a/src/junk.c
 +++ b/src/junk.c
-@@ -281,14 +281,17 @@ int jp_spec_setup(struct jp_spec *spec) {
-         goto error;
-     }
+@@ -237,8 +237,14 @@ void jp_tag_free(struct jp_tag* tag) {
+ }
+ 
+ void jp_spec_free(struct jp_spec *spec) {
++    kfree(spec->desc);
++    spec->desc = NULL;
+     kfree(spec->pkt);
++    spec->pkt = NULL;
+     kfree(spec->mods);
++    spec->mods = NULL;
++    spec->pkt_size = 0;
++    spec->mods_size = 0;
+ }
+ 
+ int jp_spec_setup(struct jp_spec *spec) {
+@@ -251,11 +257,20 @@ int jp_spec_setup(struct jp_spec *spec) {
+ 
+     mutex_init(&spec->lock);
+ 
+-    if (spec->desc == NULL)
+-        return 0;
+-
+     mutex_lock(&spec->lock);
  
 +    kfree(spec->pkt);
 +    kfree(spec->mods);
++    spec->pkt = NULL;
++    spec->mods = NULL;
 +    spec->pkt_size = 0;
 +    spec->mods_size = 0;
 +
-     spec->pkt = kzalloc(pkt_size, GFP_KERNEL);
-     spec->mods = kzalloc(mods_size * sizeof(*spec->mods), GFP_KERNEL);
-     if (!spec->pkt || !spec->mods) {
++    if (spec->desc == NULL) {
++        mutex_unlock(&spec->lock);
++        return 0;
++    }
++
+     buf = kstrdup(spec->desc, GFP_KERNEL);
+     if (!buf) {
          err = -ENOMEM;
-         goto error;
+@@ -289,6 +304,7 @@ int jp_spec_setup(struct jp_spec *spec) {
      }
--
--    spec->pkt_size = 0;
+ 
+     spec->pkt_size = 0;
++    spec->mods_size = 0;
      list_for_each_entry_reverse(tag, &head, head) {
          if (tag->pkt) {
              memcpy(spec->pkt + spec->pkt_size, tag->pkt, tag->pkt_size);
+diff --git a/src/netlink.c b/src/netlink.c
+index 9eea85a..20abe5c 100644
+--- a/src/netlink.c
++++ b/src/netlink.c
+@@ -849,26 +849,31 @@ static int wg_set_device(struct sk_buff *skb, struct genl_info *info)
+ 
+ 	if (info->attrs[WGDEVICE_A_I1]) {
+ 		wg->advanced_security = true;
++		kfree(wg->ispecs[0].desc);
+ 		wg->ispecs[0].desc = nla_strdup(info->attrs[WGDEVICE_A_I1], GFP_KERNEL);
+ 	}
+ 
+ 	if (info->attrs[WGDEVICE_A_I2]) {
+ 		wg->advanced_security = true;
++		kfree(wg->ispecs[1].desc);
+ 		wg->ispecs[1].desc = nla_strdup(info->attrs[WGDEVICE_A_I2], GFP_KERNEL);
+ 	}
+ 
+ 	if (info->attrs[WGDEVICE_A_I3]) {
+ 		wg->advanced_security = true;
++		kfree(wg->ispecs[2].desc);
+ 		wg->ispecs[2].desc = nla_strdup(info->attrs[WGDEVICE_A_I3], GFP_KERNEL);
+ 	}
+ 
+ 	if (info->attrs[WGDEVICE_A_I4]) {
+ 		wg->advanced_security = true;
++		kfree(wg->ispecs[3].desc);
+ 		wg->ispecs[3].desc = nla_strdup(info->attrs[WGDEVICE_A_I4], GFP_KERNEL);
+ 	}
+ 
+ 	if (info->attrs[WGDEVICE_A_I5]) {
+ 		wg->advanced_security = true;
++		kfree(wg->ispecs[4].desc);
+ 		wg->ispecs[4].desc = nla_strdup(info->attrs[WGDEVICE_A_I5], GFP_KERNEL);
+ 	}
+ 

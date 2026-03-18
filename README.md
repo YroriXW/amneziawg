@@ -27,4 +27,4 @@ via [my OBS repository](https://build.opensuse.org/package/show/home:YroriXW/amn
 
 **Patches & contributions**
 - [babiulep](https://github.com/babiulep) (main patch) and [zerkalica](https://github.com/zerkalica) ([arm fix](https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/issues/138#issuecomment-3876984565)) for **[blake2s.patch](https://github.com/babiulep/my-kernel-patches/blob/main/AMNEZIAWG/blake2s.patch)**
-- [Kirill Turanskiy](https://github.com/thebtf) for **[fixmemleakinjpspecsetup.patch](https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/pull/142)**
+- [Arsolitt](https://github.com/Arsolitt) for **[fixmemleakinjpspecsetup.patch](https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/pull/153)**
