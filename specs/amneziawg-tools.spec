@@ -1,6 +1,6 @@
 Name:           amneziawg-tools
 Version: 1.0.20260223
-Release: 16%{?dist}
+Release: 17%{?dist}
 URL:            https://www.wireguard.com/
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
@@ -51,6 +51,9 @@ WITH_BASHCOMPLETION=yes WITH_WGQUICK=yes WITH_SYSTEMDUNITS=yes -C src
 %{_mandir}/man8/awg-quick.8*
 
 %changelog
+* Wed Mar 18 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-17
+- correct copyright
+
 * Wed Mar 18 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260223-16
 - migrated memory leak fix to Arsolitt's PR
 

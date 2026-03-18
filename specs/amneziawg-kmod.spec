@@ -3,7 +3,7 @@
 
 Name:           amneziawg-kmod
 Version: 1.0.20260210
-Release: 16%{?dist}
+Release: 17%{?dist}
 URL:            https://github.com/amnezia-vpn/amneziawg-linux-kernel-module
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
@@ -77,6 +77,9 @@ fi
 %{?akmod_install}
 
 %changelog
+* Wed Mar 18 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-17
+- correct copyright
+
 * Wed Mar 18 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260210-16
 - migrated memory leak fix to Arsolitt's PR
 
