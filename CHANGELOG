@@ -1,3 +1,4 @@
+-17 | Thu, 19 Mar 2026 00:27:00 +0300 | correct copyright
 -16 | Thu, 19 Mar 2026 00:02:00 +0300 | migrated memory leak fix to Arsolitt's PR
 -15 | Sun, 15 Mar 2026 21:30:00 +0300 | correct description and docs of systemd units
 -14 | Mon, 09 Mar 2026 10:23:00 +0300 | add patch to the dependencies

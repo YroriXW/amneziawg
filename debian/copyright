@@ -12,11 +12,11 @@ Copyright: 2016-2020 Daniel Kahn Gillmor <dkg@fifthhorseman.net>, 2026 Oleg Yror
 License: GPL-2
 
 Files: debian/patches/blake2s.patch
-Copyright: 2026 Willy Frissen <babiulep@gmail.com>
+Copyright: 2026 Willy Frissen <babiulep@gmail.com>, 2026 Stefan Zerkalica <zerkalica@gmail.com>
 License: GPL-2
 
 Files: debian/patches/fixmemleakinjpspecsetup.patch
-Copyright: 2026 Kirill Turanskiy <kt@novamedia.ru>
+Copyright: 2026 Arsolitt <arsolitt@gmail.com>
 License: GPL-2
 
 License: GPL-2
