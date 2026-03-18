@@ -13,10 +13,11 @@ Builds are available for:
 - **Ubuntu** x86_64 and arm64 (22.04, 24.04, 25.10)
 - **Fedora** x86_64 and arm64 (42, 43)
 - **RHEL-compatible (EPEL)** x86_64 and arm64 (9, 10)  
+- **Raspbian** armv7l and arm64 (12, 13)
 
 via [my OBS repository](https://build.opensuse.org/package/show/home:YroriXW/amneziawg).  
 
-**Note:** arm64 builds are provided but have not been tested.  
+**Note:** armv7l and arm64 builds are provided but have not been tested.  
 
 ## Credits
 
