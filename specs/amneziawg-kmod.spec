@@ -38,21 +38,6 @@ kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{build
 
 %autosetup -c -N
 
-pushd %{name}
-kver=%{?kernel_versions}
-kbuilddir="${kver##*___}"
-kver="${kver%%___*}"
-# Patch needed only on 6.19+: that's when blake2s_ctx (new API) was introduced
-kver_major=$(echo "$kver" | cut -d. -f1)
-kver_minor=$(echo "$kver" | cut -d. -f2)
-if [ "$kver_major" -gt 6 ] || { [ "$kver_major" -eq 6 ] && [ "$kver_minor" -ge 19 ]; }; then
-    echo "Applying blake2s patch for kernel $kver (>= 6.19, new blake2s API)"
-    patch -p1 < ./patches/blake2s.patch
-else
-    echo "Skipping blake2s patch for kernel $kver (< 6.19, old blake2s API)"
-fi
-popd
-
 for kernel_version in %{?kernel_versions} ; do
     cp -a %{name} _kmod_build_${kernel_version%%___*}
 done
