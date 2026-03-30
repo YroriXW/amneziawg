@@ -1,17 +1,1 @@
--17 | Thu, 19 Mar 2026 00:27:00 +0300 | correct copyright
--16 | Thu, 19 Mar 2026 00:02:00 +0300 | migrated memory leak fix to Arsolitt's PR
--15 | Sun, 15 Mar 2026 21:30:00 +0300 | correct description and docs of systemd units
--14 | Mon, 09 Mar 2026 10:23:00 +0300 | add patch to the dependencies
--13 | Sat, 07 Mar 2026 21:50:00 +0300 | rewrite debseries script
--12 | Sat, 07 Mar 2026 21:11:00 +0300 | fixed changelog and debseries scripts
--11 | Sat, 07 Mar 2026 19:11:00 +0300 | fixed amneziawg-tools env
--10 | Sat, 07 Mar 2026 19:11:00 +0300 | fixed arm builds
--9 | Sat, 07 Mar 2026 19:11:00 +0300 | rename patch, release to 9 and some restructuring
--8 | Sat, 07 Mar 2026 19:11:00 +0300 | More automatizations!
--7 | Sat, 07 Mar 2026 17:11:00 +0300 | Automations
--6 | Sat, 07 Mar 2026 11:11:00 +0300 | Unified changelog for deb based distros
--5 | Fri, 06 Mar 2026 11:11:00 +0300 | Fix links, copyrights, typos; Simplify logic of applying blake2s patch
--4 | Thu, 05 Mar 2026 11:11:00 +0300 | Introduced smart check for blake2s patching; Properly building deb
--3 | Wed, 04 Mar 2026 11:11:00 +0300 | Added debian builds; Patches applying in CI now
--2 | Sun, 01 Mar 2026 11:11:00 +0300 | Added patch for memory leak, blake2s, version string
--1 | Sat, 28 Feb 2026 11:11:00 +0300 | Initial build
+-1 | Mon, 30 Mar 2026 19:17:00 +0300 | All patches now in the upstream

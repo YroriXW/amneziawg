@@ -24,7 +24,3 @@ via [my OBS repository](https://build.opensuse.org/package/show/home:YroriXW/amn
 **Base projects**
 - [Amnezia VPN team](https://amnezia.org) and the entire [amnezia-vpn organization](https://github.com/amnezia-vpn) — for creating and maintaining AmneziaWG.
 - [WireGuard project](https://www.wireguard.com/) and its author **[Jason A. Donenfeld (zx2c4)](https://www.zx2c4.com/)** — AmneziaWG is a fork of the original WireGuard.
-
-**Patches & contributions**
-- [babiulep](https://github.com/babiulep) (main patch) and [zerkalica](https://github.com/zerkalica) ([arm fix](https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/issues/138#issuecomment-3876984565)) for **[blake2s.patch](https://github.com/babiulep/my-kernel-patches/blob/main/AMNEZIAWG/blake2s.patch)**
-- [Arsolitt](https://github.com/Arsolitt) for **[fixmemleakinjpspecsetup.patch](https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/pull/153)**
