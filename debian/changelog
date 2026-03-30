@@ -1,3 +1,9 @@
+amneziawg-linux-kmod (1.0.20260329-1) unstable; urgency=medium
+
+  * All patches now in the upstream
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Mon, 30 Mar 2026 19:17:00 +0300
+
 amneziawg-linux-kmod (1.0.20260210-17) unstable; urgency=medium
 
   * correct copyright
