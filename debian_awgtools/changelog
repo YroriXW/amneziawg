@@ -1,3 +1,15 @@
+amneziawg (1.0.20260329-2) unstable; urgency=medium
+
+  * Some fixes
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Mon, 30 Mar 2026 19:17:00 +0300
+
+amneziawg (1.0.20260329-1) unstable; urgency=medium
+
+  * All patches now in the upstream
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Mon, 30 Mar 2026 19:17:00 +0300
+
 amneziawg (1.0.20210914-1ubuntu2) jammy; urgency=medium
 
   * Add better DEP8 tests (LP: #1952102):
