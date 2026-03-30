@@ -33,7 +33,7 @@ jobs:
       - name: Generate and commit changelogs
         env:
           UPSTREAM: ${{ steps.version.outputs.upstream }}
-          UPSTREAM_TOOLS: ${{ steps.version.outputs.upstream_tools }}
+          UPSTREAM_TOOLS: ${{ steps.version.outputs.upstream }}
           RELEASE: ${{ steps.version.outputs.release }}
         run: |
           bash scripts/gen_changelog.sh \
@@ -71,9 +71,9 @@ jobs:
           tar -xzf source.tar.gz
           tar -xzf source-tools.tar.gz
           mv amneziawg-linux-kernel-module-* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }} || true
-          mv amneziawg-tools-* amneziawg-tools-${{ steps.version.outputs.upstream_tools }} || true
+          mv amneziawg-tools-* amneziawg-tools-${{ steps.version.outputs.upstream }} || true
           rm -rf amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/debian
-          rm -rf amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian
+          rm -rf amneziawg-tools-${{ steps.version.outputs.upstream }}/debian
 
           cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src
           rm -rf dkms.conf
@@ -89,16 +89,16 @@ jobs:
 
           sed -i "s/#define WIREGUARD_VERSION \".*\"/#define WIREGUARD_VERSION \"${{ steps.version.outputs.upstream }}\"/" \
                 amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/version.h
-          sed -i "s/#define WIREGUARD_TOOLS_VERSION \".*\"/#define WIREGUARD_TOOLS_VERSION \"${{ steps.version.outputs.upstream_tools }}\"/" \
-                amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src/version.h
-          sed -i 's/Description=WireGuard Tunnels via wg-quick(8)/Description=AmneziaWG Tunnels via awg-quick(8)/' amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src/systemd/wg-quick.target
+          sed -i "s/#define WIREGUARD_TOOLS_VERSION \".*\"/#define WIREGUARD_TOOLS_VERSION \"${{ steps.version.outputs.upstream }}\"/" \
+                amneziawg-tools-${{ steps.version.outputs.upstream }}/src/version.h
+          sed -i 's/Description=WireGuard Tunnels via wg-quick(8)/Description=AmneziaWG Tunnels via awg-quick(8)/' amneziawg-tools-${{ steps.version.outputs.upstream }}/src/systemd/wg-quick.target
           sed -i \
             -e 's/Description=WireGuard via wg-quick(8) for %I/Description=AmneziaWG via awg-quick(8) for %I/' \
             -e 's|Documentation=https://www\.wireguard\.com/$|Documentation=https://docs.amnezia.org/documentation/amnezia-wg|' \
             -e 's|Documentation=https://www\.wireguard\.com/quickstart/|Documentation=https://github.com/amnezia-vpn/amneziawg-tools|' \
             -e 's|Documentation=https://git\.zx2c4\.com/wireguard-tools/about/src/man/wg-quick\.8|Documentation=https://github.com/amnezia-vpn/amneziawg-tools/raw/refs/heads/master/src/man/wg-quick.8|' \
             -e 's|Documentation=https://git\.zx2c4\.com/wireguard-tools/about/src/man/wg\.8|Documentation=https://github.com/amnezia-vpn/amneziawg-tools/blob/master/src/man/wg.8|' \
-            'amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src/systemd/wg-quick@.service'
+            'amneziawg-tools-${{ steps.version.outputs.upstream }}/src/systemd/wg-quick@.service'
           cp -r patches/automatic/kmod/*.patch debian/patches || true
           cp -r debian amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/
           cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }} && export QUILT_PATCHES=debian/patches && quilt push -a || true && rm -rf .pc && cd ../
@@ -116,18 +116,18 @@ jobs:
           cd ../
 
           cp -r patches/automatic/tools/*.patch debian_awgtools/patches/ || true
-          cp -r debian_awgtools amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian
-          cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }} && export QUILT_PATCHES=debian/patches && quilt push -a || true && rm -rf .pc && cd ../
+          cp -r debian_awgtools amneziawg-tools-${{ steps.version.outputs.upstream }}/debian
+          cd amneziawg-tools-${{ steps.version.outputs.upstream }} && export QUILT_PATCHES=debian/patches && quilt push -a || true && rm -rf .pc && cd ../
           
-          mkdir amneziawg_${{ steps.version.outputs.upstream_tools }}
-          rm -rf amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian/patches       
-          cp -r amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/src amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/contrib amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/COPYING amneziawg_${{ steps.version.outputs.upstream_tools }}/
-          tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz amneziawg_${{ steps.version.outputs.upstream_tools }}
-          cp -r amneziawg_${{ steps.version.outputs.upstream_tools }} amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
-          tar -czvf amneziawg-tools.tar.gz amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
-          cd amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
-          tar -czvf amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz debian
-          mv amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz ../
+          mkdir amneziawg_${{ steps.version.outputs.upstream }}
+          rm -rf amneziawg-tools-${{ steps.version.outputs.upstream }}/debian/patches       
+          cp -r amneziawg-tools-${{ steps.version.outputs.upstream }}/src amneziawg-tools-${{ steps.version.outputs.upstream }}/contrib amneziawg-tools-${{ steps.version.outputs.upstream }}/COPYING amneziawg_${{ steps.version.outputs.upstream }}/
+          tar -czvf amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz amneziawg_${{ steps.version.outputs.upstream }}
+          cp -r amneziawg_${{ steps.version.outputs.upstream }} amneziawg-tools-${{ steps.version.outputs.upstream }}
+          tar -czvf amneziawg-tools.tar.gz amneziawg-tools-${{ steps.version.outputs.upstream }}
+          cd amneziawg-tools-${{ steps.version.outputs.upstream }}
+          tar -czvf amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz debian
+          mv amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz ../
           cd ../
 
           MD5orig=$(md5sum amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz | cut -d ' ' -f1)
@@ -160,18 +160,18 @@ jobs:
            ${SHA256debian} ${SIZEdebian} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
           EOF
 
-          MD5orig=$(md5sum amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz | cut -d ' ' -f1)
-          MD5debian=$(md5sum amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
-          SHA256orig=$(sha256sum amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz | cut -d ' ' -f1)
-          SHA256debian=$(sha256sum amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
-          SIZEorig=$(wc -c < amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz)
-          SIZEdebian=$(wc -c < amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz)
+          MD5orig=$(md5sum amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz | cut -d ' ' -f1)
+          MD5debian=$(md5sum amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
+          SHA256orig=$(sha256sum amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz | cut -d ' ' -f1)
+          SHA256debian=$(sha256sum amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz | cut -d ' ' -f1)
+          SIZEorig=$(wc -c < amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz)
+          SIZEdebian=$(wc -c < amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz)
 
           cat > amneziawg.dsc << EOF
           Format: 3.0 (quilt)
           Source: amneziawg
           Binary: amneziawg
-          Version: ${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}
+          Version: ${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}
           Maintainer: Oleg YroriXW <olegyrori@gmail.com>
           Architecture: all
           Vcs-Git: https://github.com/YroriXW/amneziawg.git
@@ -182,18 +182,18 @@ jobs:
             amneziawg deb net optional arch=all
           Homepage: https://amnezia.org
           Files:
-           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
-           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
+           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz
+           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
           Checksums-Sha256:
-           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
-           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
+           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz
+           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
           EOF
 
           cat > amneziawg-tools.dsc << EOF
           Format: 3.0 (quilt)
           Source: amneziawg
           Binary: amneziawg-tools
-          Version: ${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}
+          Version: ${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}
           Maintainer: Oleg YroriXW <olegyrori@gmail.com>
           Architecture: all
           Vcs-Git: https://github.com/YroriXW/amneziawg.git
@@ -204,11 +204,11 @@ jobs:
             amneziawg-tools deb net optional arch=all
           Homepage: https://amnezia.org          
           Files:
-           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
-           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
+           ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz
+           ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
           Checksums-Sha256:
-           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
-           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
+           ${SHA256orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz
+           ${SHA256debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
           EOF
 
       - name: Upload to release
@@ -217,8 +217,8 @@ jobs:
           files: |
             amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz
             amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
-            amneziawg_${{ steps.version.outputs.upstream_tools }}.orig.tar.gz
-            amneziawg_${{ steps.version.outputs.upstream_tools }}-${{ steps.version.outputs.release }}.debian.tar.gz
+            amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz
+            amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz
             amneziawg-kmod.tar.gz
             amneziawg-tools.tar.gz
             amneziawg-kmod.dsc
@@ -235,7 +235,7 @@ jobs:
           OBS_PROJECT: ${{ secrets.OBS_PROJECT }}
           OBS_PACKAGE: ${{ secrets.OBS_PACKAGE }}
           UPSTREAM: ${{ steps.version.outputs.upstream }}
-          UPSTREAM_TOOLS: ${{ steps.version.outputs.upstream_tools }}
+          UPSTREAM_TOOLS: ${{ steps.version.outputs.upstream }}
           RELEASE: ${{ steps.version.outputs.release }}
         run: |
           mkdir -p ~/.config/osc
