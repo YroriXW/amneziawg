@@ -70,8 +70,8 @@ jobs:
         run: |
           tar -xzf source.tar.gz
           tar -xzf source-tools.tar.gz
-          mv amneziawg-linux-kernel-module* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}
-          mv amneziawg-tools* amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
+          mv amneziawg-linux-kernel-module-* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}
+          mv amneziawg-tools-* amneziawg-tools-${{ steps.version.outputs.upstream_tools }}
           rm -rf amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/debian
           rm -rf amneziawg-tools-${{ steps.version.outputs.upstream_tools }}/debian
 
