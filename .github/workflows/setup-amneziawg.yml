@@ -25,7 +25,7 @@ jobs:
           TAG=${GITHUB_REF_NAME#v}
           UPSTREAM=${TAG%-*}
           RELEASE=${TAG##*-}
-          UPSTREAM_TOOLS=1.0.20260618-2
+          UPSTREAM_TOOLS=1.0.20260618
           echo "upstream=$UPSTREAM" >> $GITHUB_OUTPUT
           echo "upstream_tools=$UPSTREAM_TOOLS" >> $GITHUB_OUTPUT
           echo "release=$RELEASE" >> $GITHUB_OUTPUT
@@ -62,9 +62,9 @@ jobs:
       - name: Download upstream source
         run: |
           wget -O source.tar.gz \
-            "https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v${{ steps.version.outputs.upstream }}-2.tar.gz"
+            "https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v${{ steps.version.outputs.upstream }}.tar.gz"
           wget -O source-tools.tar.gz \
-            "https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v${{ steps.version.outputs.upstream_tools }}.tar.gz"
+            "https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v${{ steps.version.outputs.upstream_tools }}-2.tar.gz"
 
       - name: Extract and repack
         run: |
