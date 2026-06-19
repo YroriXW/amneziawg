@@ -51,12 +51,6 @@ WITH_BASHCOMPLETION=yes WITH_WGQUICK=yes WITH_SYSTEMDUNITS=yes -C src
 %{_mandir}/man8/awg-quick.8*
 
 %changelog
-* Mon Mar 30 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260611-2
-- Some fixes
-
-* Mon Mar 30 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260611-1
-- All patches now in the upstream
-
 * Mon Mar 30 2026 Oleg YroriXW <olegyrori@gmail.com> - 1.0.20260329-2
 - Some fixes
 
