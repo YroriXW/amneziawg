@@ -1,7 +1,7 @@
-diff --git a/src/socket.c b/src/socket.c
+diff --git a/socket.c b/socket.c
 index 39e836d..b4d38b1 100644
---- a/src/socket.c
-+++ b/src/socket.c
+--- a/socket.c
++++ b/socket.c
 @@ -136,8 +136,7 @@ static int send6(struct wg_device *wg, struct sk_buff *skb,
  			if (cache)
  				dst_cache_reset(cache);
