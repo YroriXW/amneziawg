@@ -84,6 +84,7 @@ jobs:
           
           BUILT_MODULE_NAME="amneziawg"
           DEST_MODULE_LOCATION="/kernel/drivers/net/amneziawg"
+          PRE_BUILD="pre-build.sh"
           EOF
           cd ../../
 
@@ -105,7 +106,7 @@ jobs:
 
           mkdir -p amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/patches
           rm -rf amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/debian/patches       
-          cp -r amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/COPYING amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/
+          cp -r amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/COPYING dkms/* amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/
           cp -r patches/special/kmod/*.patch amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/patches/ || true
           tar -czvf amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}
           cp -r amneziawg-linux-kmod_${{ steps.version.outputs.upstream }} amneziawg-kmod

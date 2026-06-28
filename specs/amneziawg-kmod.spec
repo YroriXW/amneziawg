@@ -38,6 +38,21 @@ kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{build
 
 %autosetup -c -N
 
+pushd %{name}
+kver=%{?kernel_versions}
+kbuilddir="${kver##*___}"
+kver="${kver%%___*}"
+# Patch needed only on 7.1+
+kver_major=$(echo "$kver" | cut -d. -f1)
+kver_minor=$(echo "$kver" | cut -d. -f2)
+if [ "$kver_major" -gt 7 ] || { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -ge 1 ]; }; then
+    echo "Applying ipv6 patch for kernel $kver (>= 7.1)"
+    patch -p1 < ./patches/ipv6.patch
+else
+    echo "Skipping blake2s patch for kernel $kver (< 7.1)"
+fi
+popd
+
 for kernel_version in %{?kernel_versions} ; do
     cp -a %{name} _kmod_build_${kernel_version%%___*}
 done
