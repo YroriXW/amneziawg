@@ -1,3 +1,9 @@
+amneziawg (1.0.20260611-4) unstable; urgency=medium
+
+  * Fix ipv6 patch
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sun, 28 Jun 2026 14:18:00 +0300
+
 amneziawg (1.0.20260611-3) unstable; urgency=medium
 
   * Fix ipv6 error for kernels >= 7.1
