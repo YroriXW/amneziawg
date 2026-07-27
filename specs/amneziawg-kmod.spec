@@ -39,38 +39,33 @@ kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{build
 %autosetup -c -N
 
 pushd %{name}
-kver=%{?kernel_versions}
-kbuilddir="${kver##*___}"
-kver="${kver%%___*}"
-# Patch needed only on 7.1+
-kver_major=$(echo "$kver" | cut -d. -f1)
-kver_minor=$(echo "$kver" | cut -d. -f2)
-if [ "$kver_major" -gt 7 ] || { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -ge 1 ]; }; then
-    echo "Applying ipv6 patch for kernel $kver (>= 7.1)"
-    patch -p1 < ./patches/ipv6.patch
-else
-    echo "Skipping blake2s patch for kernel $kver (< 7.1)"
-fi
-popd
 
-pushd %{name}
+kver_raw="%{?kernel_versions}"
+kbuilddir="${kver_raw##*___}"
+kver="${kver_raw%%___*}"
 
-kver=%{?kernel_versions}
-kbuilddir="${kver##*___}"
-kver="${kver%%___*}"
-
-# Patch needed only on 7.1.5+
 kver_major=$(echo "$kver" | cut -d. -f1)
 kver_minor=$(echo "$kver" | cut -d. -f2)
 kver_patch=$(echo "$kver" | cut -d. -f3 | cut -d- -f1)
 
+kver_major=${kver_major:-0}
+kver_minor=${kver_minor:-0}
+kver_patch=${kver_patch:-0}
+
+if [ "$kver_major" -gt 7 ] || { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -ge 1 ]; }; then
+    echo "Applying ipv6.patch for kernel $kver (>= 7.1)"
+    patch -p1 < ./patches/ipv6.patch
+else
+    echo "Skipping ipv6.patch for kernel $kver (< 7.1)"
+fi
+
 if [ "$kver_major" -gt 7 ] || \
    { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -gt 1 ]; } || \
    { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -eq 1 ] && [ "$kver_patch" -ge 5 ]; }; then
-    echo "Applying socketfix patch for kernel $kver (>= 7.1.5)"
+    echo "Applying socketfix.patch for kernel $kver (>= 7.1.5)"
     patch -p1 < ./patches/socketfix.patch
 else
-    echo "Skipping socketfix patch for kernel $kver (< 7.1.5)"
+    echo "Skipping socketfix.patch for kernel $kver (< 7.1.5)"
 fi
 
 popd
