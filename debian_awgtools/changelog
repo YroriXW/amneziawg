@@ -1,3 +1,9 @@
+amneziawg (1.0.20260611-5) unstable; urgency=medium
+
+  * Socket patch for kernel >= 7.1.5
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Mon, 27 Jul 2026 17:15:00 +0300
+
 amneziawg (1.0.20260611-4) unstable; urgency=medium
 
   * Fix ipv6 patch
