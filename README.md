@@ -26,4 +26,4 @@ via [my OBS repository](https://build.opensuse.org/package/show/home:YroriXW/amn
 - [WireGuard project](https://www.wireguard.com/) and its author **[Jason A. Donenfeld (zx2c4)](https://www.zx2c4.com/)** — AmneziaWG is a fork of the original WireGuard.
 
 **Patches & contributions**
-- [K900](https://github.com/K900) (ipv6 fix)
+- [K900](https://github.com/K900) (ipv6 fix, socket fix)

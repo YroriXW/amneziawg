@@ -53,6 +53,28 @@ else
 fi
 popd
 
+pushd %{name}
+
+kver=%{?kernel_versions}
+kbuilddir="${kver##*___}"
+kver="${kver%%___*}"
+
+# Patch needed only on 7.1.5+
+kver_major=$(echo "$kver" | cut -d. -f1)
+kver_minor=$(echo "$kver" | cut -d. -f2)
+kver_patch=$(echo "$kver" | cut -d. -f3 | cut -d- -f1)
+
+if [ "$kver_major" -gt 7 ] || \
+   { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -gt 1 ]; } || \
+   { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -eq 1 ] && [ "$kver_patch" -ge 5 ]; }; then
+    echo "Applying socketfix patch for kernel $kver (>= 7.1.5)"
+    patch -p1 < ./patches/socketfix.patch
+else
+    echo "Skipping socketfix patch for kernel $kver (< 7.1.5)"
+fi
+
+popd
+
 for kernel_version in %{?kernel_versions} ; do
     cp -a %{name} _kmod_build_${kernel_version%%___*}
 done
