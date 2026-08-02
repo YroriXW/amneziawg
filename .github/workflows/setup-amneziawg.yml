@@ -8,24 +8,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-          contents: write 
+          contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-    
+
       - name: Preparing environment
         run: |
           sudo apt-get update
           sudo apt-get install quilt dpkg-dev xz-utils osc -y
-    
+
       - name: Parse version and release
         id: version
         run: |
           TAG=${GITHUB_REF_NAME#v}
           UPSTREAM=${TAG%-*}
           RELEASE=${TAG##*-}
-          UPSTREAM_TOOLS=1.0.20260618
+          UPSTREAM_TOOLS=3.0.20260730
           echo "upstream=$UPSTREAM" >> $GITHUB_OUTPUT
           echo "upstream_tools=$UPSTREAM_TOOLS" >> $GITHUB_OUTPUT
           echo "release=$RELEASE" >> $GITHUB_OUTPUT
@@ -48,9 +48,9 @@ jobs:
           sed -i "s/^Release:.*/Release: ${RELEASE}%{?dist}/" specs/amneziawg-tools.spec
           sed -i "s|/download/v[^/]*/amneziawg-tools|/download/v${UPSTREAM}-%{release}/amneziawg-tools|" specs/amneziawg-tools.spec
 
-          bash scripts/gen_debseries.sh  patches/automatic/kmod  debian/patches/series 
+          bash scripts/gen_debseries.sh  patches/automatic/kmod  debian/patches/series
           bash scripts/gen_debseries.sh  patches/automatic/tools debian_awgtools/patches/series
-              
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add CHANGELOG debian/changelog debian_awgtools/changelog \
@@ -62,9 +62,9 @@ jobs:
       - name: Download upstream source
         run: |
           wget -O source.tar.gz \
-            "https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v${{ steps.version.outputs.upstream }}.tar.gz"
+            "https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v${{ steps.version.outputs.upstream }}-04.tar.gz"
           wget -O source-tools.tar.gz \
-            "https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v${{ steps.version.outputs.upstream_tools }}-2.tar.gz"
+            "https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v${{ steps.version.outputs.upstream_tools }}.tar.gz"
 
       - name: Extract and repack
         run: |
@@ -81,7 +81,7 @@ jobs:
           PACKAGE_NAME="amneziawg"
           PACKAGE_VERSION="${{ steps.version.outputs.upstream }}"
           AUTOINSTALL=yes
-          
+
           BUILT_MODULE_NAME="amneziawg"
           DEST_MODULE_LOCATION="/kernel/drivers/net/amneziawg"
           PRE_BUILD="pre-build.sh"
@@ -105,7 +105,7 @@ jobs:
           cd amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }} && export QUILT_PATCHES=debian/patches && quilt push -a || true && rm -rf .pc && cd ../
 
           mkdir -p amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/patches
-          rm -rf amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/debian/patches       
+          rm -rf amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/debian/patches
           cp -r amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/src/* amneziawg-linux-kernel-module-${{ steps.version.outputs.upstream }}/COPYING dkms/* amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/
           cp -r patches/special/kmod/*.patch amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}/patches/ || true
           tar -czvf amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}
@@ -119,9 +119,9 @@ jobs:
           cp -r patches/automatic/tools/*.patch debian_awgtools/patches/ || true
           cp -r debian_awgtools amneziawg-tools-${{ steps.version.outputs.upstream }}/debian
           cd amneziawg-tools-${{ steps.version.outputs.upstream }} && export QUILT_PATCHES=debian/patches && quilt push -a || true && rm -rf .pc && cd ../
-          
+
           mkdir amneziawg_${{ steps.version.outputs.upstream }}
-          rm -rf amneziawg-tools-${{ steps.version.outputs.upstream }}/debian/patches       
+          rm -rf amneziawg-tools-${{ steps.version.outputs.upstream }}/debian/patches
           cp -r amneziawg-tools-${{ steps.version.outputs.upstream }}/src amneziawg-tools-${{ steps.version.outputs.upstream }}/contrib amneziawg-tools-${{ steps.version.outputs.upstream }}/COPYING amneziawg_${{ steps.version.outputs.upstream }}/
           tar -czvf amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz amneziawg_${{ steps.version.outputs.upstream }}
           cp -r amneziawg_${{ steps.version.outputs.upstream }} amneziawg-tools-${{ steps.version.outputs.upstream }}
@@ -151,7 +151,7 @@ jobs:
           Build-Depends-Indep: dh-dkms | dkms (<< 3.0.10)
           Standards-Version: 4.7.2
           Package-List:
-            amneziawg-dkms deb kernel optional arch=all    
+            amneziawg-dkms deb kernel optional arch=all
           Homepage: https://amnezia.org
           Files:
            ${MD5orig} ${SIZEorig} amneziawg-linux-kmod_${{ steps.version.outputs.upstream }}.orig.tar.gz
@@ -203,7 +203,7 @@ jobs:
           Standards-Version: 4.7.2
           Package-List:
             amneziawg-tools deb net optional arch=all
-          Homepage: https://amnezia.org          
+          Homepage: https://amnezia.org
           Files:
            ${MD5orig} ${SIZEorig} amneziawg_${{ steps.version.outputs.upstream }}.orig.tar.gz
            ${MD5debian} ${SIZEdebian} amneziawg_${{ steps.version.outputs.upstream }}-${{ steps.version.outputs.release }}.debian.tar.gz

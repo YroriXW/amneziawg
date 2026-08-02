@@ -36,13 +36,6 @@ apply_patch() {
     fi
 }
 
-if [ "$KVER_MAJOR" -gt 7 ] || { [ "$KVER_MAJOR" -eq 7 ] && [ "$KVER_MINOR" -ge 1 ]; }; then
-    echo "amneziawg: kernel $KVER >= 7.1, checking ipv6.patch"
-    apply_patch "$(dirname "$0")/patches/ipv6.patch"
-else
-    echo "amneziawg: kernel $KVER < 7.1, does not need ipv6.patch"
-fi
-
 if [ "$KVER_MAJOR" -gt 7 ] || \
    { [ "$KVER_MAJOR" -eq 7 ] && [ "$KVER_MINOR" -gt 1 ]; } || \
    { [ "$KVER_MAJOR" -eq 7 ] && [ "$KVER_MINOR" -eq 1 ] && [ "$KVER_PATCH" -ge 5 ]; }; then
