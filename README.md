@@ -18,6 +18,9 @@ via [my OBS repository](https://build.opensuse.org/package/show/home:YroriXW/amn
 
 **Note:** armv7l and arm64 builds are provided but have not been tested.  
 
+## TODO list
+- Rewrite workflow, scripts, make more readable. I can't say exactly when, but I know how much of chaos in this repo :(
+
 ## Credits
 
 **Base projects**
