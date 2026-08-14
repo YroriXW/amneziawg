@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           amneziawg
-Version: 3.0.20260805
+Version: 3.1.20260812
 Release: 1%{?dist}
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
@@ -18,6 +18,9 @@ Common package for AmneziaWG
 %files
 
 %changelog
+* Fri Aug 14 2026 Oleg YroriXW <olegyrori@gmail.com> - 3.1.20260812-1
+- Upgrade amneziawg-tools and amneziawg-kernel-module to v3.1.20260812
+
 * Fri Aug 07 2026 Oleg YroriXW <olegyrori@gmail.com> - 3.0.20260805-1
 - Upgrade amneziawg-tools and amneziawg-kernel-module to v3.0.20260805
 
