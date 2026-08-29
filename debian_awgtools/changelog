@@ -1,3 +1,9 @@
+amneziawg (3.1.20260828-1) unstable; urgency=medium
+
+  * Upgrade amneziawg-tools and amneziawg-kernel-module to v3.1.20260828
+
+ -- Oleg YroriXW <olegyrori@gmail.com>  Sat, 29 Aug 2026 11:34:00 +0300
+
 amneziawg (3.1.20260812-1) unstable; urgency=medium
 
   * Upgrade amneziawg-tools and amneziawg-kernel-module to v3.1.20260812
