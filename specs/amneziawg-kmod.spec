@@ -38,30 +38,6 @@ kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{build
 
 %autosetup -c -N
 
-pushd %{name}
-
-kver_raw="%{?kernel_versions}"
-kver="${kver_raw%%___*}"
-
-kver_major=$(echo "$kver" | cut -d. -f1)
-kver_minor=$(echo "$kver" | cut -d. -f2)
-kver_patch=$(echo "$kver" | cut -d. -f3 | cut -d- -f1)
-
-kver_major=${kver_major:-0}
-kver_minor=${kver_minor:-0}
-kver_patch=${kver_patch:-0}
-
-if [ "$kver_major" -gt 7 ] || \
-   { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -gt 1 ]; } || \
-   { [ "$kver_major" -eq 7 ] && [ "$kver_minor" -eq 1 ] && [ "$kver_patch" -ge 5 ]; }; then
-    echo "Applying socketfix.patch for kernel $kver (>= 7.1.5)"
-    patch -p1 < ./patches/socketfix.patch
-else
-    echo "Skipping socketfix.patch for kernel $kver (< 7.1.5)"
-fi
-
-popd
-
 for kernel_version in %{?kernel_versions} ; do
     cp -a %{name} _kmod_build_${kernel_version%%___*}
 done
