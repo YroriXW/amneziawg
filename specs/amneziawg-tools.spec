@@ -1,11 +1,11 @@
 Name:           amneziawg-tools
-Version: 3.1.20260828
+Version: 3.1.20260906
 Release: 1%{?dist}
 URL:            https://www.wireguard.com/
 Summary:        Fast, modern, secure VPN tunnel
 License:        GPL-2.0-only
 
-Source0:        https://github.com/YroriXW/amneziawg/releases/download/v3.1.20260828-%{release}/amneziawg-tools.tar.gz
+Source0:        https://github.com/YroriXW/amneziawg/releases/download/v3.1.20260906-%{release}/amneziawg-tools.tar.gz
 
 %{?systemd_requires}
 BuildRequires: make
@@ -51,6 +51,9 @@ WITH_BASHCOMPLETION=yes WITH_WGQUICK=yes WITH_SYSTEMDUNITS=yes -C src
 %{_mandir}/man8/awg-quick.8*
 
 %changelog
+* Sat Aug 29 2026 Oleg YroriXW <olegyrori@gmail.com> - 3.1.20260906-1
+- Upgrade amneziawg-tools and amneziawg-kernel-module to v3.1.20260828
+
 * Sat Aug 29 2026 Oleg YroriXW <olegyrori@gmail.com> - 3.1.20260828-1
 - Upgrade amneziawg-tools and amneziawg-kernel-module to v3.1.20260828
 

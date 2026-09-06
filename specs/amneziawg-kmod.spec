@@ -2,7 +2,7 @@
 %define buildforkernels akmod
 
 Name:           amneziawg-kmod
-Version: 3.1.20260828
+Version: 3.1.20260906
 Release: 1%{?dist}
 URL:            https://github.com/amnezia-vpn/amneziawg-linux-kernel-module
 Summary:        Fast, modern, secure VPN tunnel
@@ -62,6 +62,9 @@ fi
 %{?akmod_install}
 
 %changelog
+* Sat Aug 29 2026 Oleg YroriXW <olegyrori@gmail.com> - 3.1.20260906-1
+- Upgrade amneziawg-tools and amneziawg-kernel-module to v3.1.20260828
+
 * Sat Aug 29 2026 Oleg YroriXW <olegyrori@gmail.com> - 3.1.20260828-1
 - Upgrade amneziawg-tools and amneziawg-kernel-module to v3.1.20260828
 
