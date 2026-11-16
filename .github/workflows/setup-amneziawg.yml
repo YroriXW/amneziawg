@@ -62,7 +62,7 @@ jobs:
       - name: Download upstream source
         run: |
           wget -O source.tar.gz \
-            "https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v${{ steps.version.outputs.upstream }}.tar.gz"
+            "https://github.com/amnezia-vpn/amneziawg-linux-kernel-module/archive/refs/tags/v${{ steps.version.outputs.upstream }}-02.tar.gz"
           wget -O source-tools.tar.gz \
             "https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v${{ steps.version.outputs.upstream_tools }}.tar.gz"
 
